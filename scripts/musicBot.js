@@ -19,7 +19,7 @@ function convertHexToFile(hexValue) {
 }
 
 // 音声ファイルを結合する関数
-function concatAudio(inputFiles, outputFilePath) {
+function concatAudio (inputFiles, outputFilePath) {
   const ffmpeg = spawn(ffmpegPath, [
     '-i', `concat:${inputFiles.join('|')}`,
     '-c', 'copy',
@@ -40,7 +40,7 @@ function concatAudio(inputFiles, outputFilePath) {
 }
 
 module.exports = (robot) => {
-  robot.respond(/play:(.+)/i, (res) => {
+  robot.respond(/music:(.+)/i, async (res) => {
     let inputDecimal = parseFloat(res.match[1]);
     let hexValue = convertDecimalToHex(inputDecimal);
 
@@ -66,11 +66,13 @@ module.exports = (robot) => {
     // 音声ファイルを結合
     concatAudio(filePaths, outputFilePath);
 
+
+    res.send(`12進数に直すと` + hexValue);
     // 結合されたファイルのパスを返す
     res.send({
       path: outputFilePath
     });
   });
+
+  // ...
 };
-
-
