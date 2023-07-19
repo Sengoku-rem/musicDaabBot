@@ -73,7 +73,7 @@ module.exports = (robot) => {
   robot.respond(/music:(.+)/i, async (res) => {
     let inputDecimal = parseFloat(res.match[1]);
     if (!Number.isInteger(inputDecimal)) {
-      res.send('コマンドは music:整数 です');
+      res.send('コマンドは music:自然数 です');
       return;
     }
 
