@@ -72,8 +72,8 @@ function concatAudio(inputFiles, outputFilePath) {
 module.exports = (robot) => {
   robot.respond(/music:(.+)/i, async (res) => {
     let inputDecimal = parseFloat(res.match[1]);
-    if (!Number.isInteger(inputDecimal)) {
-      res.send('コマンドは music:自然数 です');
+    if (!Number.isInteger(inputDecimal) && inputDecimal < 1) {
+      res.send('コマンドは music:（0 or 自然数） です');
       return;
     }
 
